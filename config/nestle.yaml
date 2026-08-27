@@ -1,0 +1,108 @@
+# Nestle client configuration
+# This file drives the validation engine for Nestle.
+# To add another client: copy this file, rename it, and adjust values.
+
+client_id: nestle
+client_display_name: "Nestlé India"
+
+# Location master table (used for completeness check)
+location_master_table: ebux_offtake.nestle_location_master
+
+# Shared PDP crawl table
+pdp_table: ebux_pdp
+
+# Completeness check: set expected_skus and expected_locations per platform
+# Leave null to skip the completeness check for that platform
+# Format: pf_id -> {expected_skus: N, expected_locations: M}
+completeness_targets:
+  # Examples (fill in when you have the real numbers):
+  # 2:   {expected_skus: 100, expected_locations: 10}
+  # 4:   {expected_skus: 80,  expected_locations: 8}
+
+# Column name remapping — change these if the real DB uses different names
+# Format: logical_name: actual_column_name_in_db
+column_map:
+  pf_id: pf_id
+  sku_id: sku_id
+  sku_name: sku_name
+  mrp: mrp
+  sp: sp
+  price_rp: price_rp
+  price_sp: price_sp
+  osa: osa
+  osa_remark: osa_remark
+  region: region
+  location_id: location_id
+  status: status
+  crawl_date: crawl_date
+  product_id: product_id
+
+# OSA remark code meanings (do not change unless source changes)
+osa_remark_codes:
+  out_of_stock: 0
+  in_stock: 1
+  not_listed: 2
+
+# Status flag values in the crawl table
+status_values:
+  raw: "raw"
+  processed: "processed"
+
+# Active platform IDs for this client (from platform_nestle.xlsx, status=1)
+active_platforms:
+  - pf_id: 1
+    name: "Flipkart National"
+    alias: FK
+    pdp_table: flipkart_crawl_pdp
+  - pf_id: 2
+    name: "Amazon FBA"
+    alias: AMZ
+    pdp_table: amazon_crawl_pdp
+  - pf_id: 3
+    name: "Flipkart Supermart"
+    alias: FKSM
+    pdp_table: flipkart_supermart_crawl_pdp
+  - pf_id: 4
+    name: "Bigbasket"
+    alias: BB
+    pdp_table: bigbasket_crawl_pdp
+  - pf_id: 6
+    name: "Blinkit"
+    alias: GR
+    pdp_table: grofers_crawl_pdp
+  - pf_id: 7
+    name: "Amazon Fresh Ambient"
+    alias: AMZ_FRESH
+    pdp_table: amazon_fresh_crawl_pdp
+  - pf_id: 10
+    name: "1MG"
+    alias: OMG
+    pdp_table: 1mg_crawl_pdp
+  - pf_id: 17
+    name: "Swiggy Instamart"
+    alias: SWG
+    pdp_table: swiggy_instamart_crawl_pdp
+  - pf_id: 20
+    name: "Amazon Fresh Chilled"
+    alias: AMZ_FRESH
+    pdp_table: amazon_fresh_chocolate_crawl_pdp
+  - pf_id: 29
+    name: "Zepto"
+    alias: ZEP
+    pdp_table: zepto_crawl_pdp
+  - pf_id: 32
+    name: "First Cry"
+    alias: FC
+    pdp_table: firstcry_crawl_pdp
+  - pf_id: 35
+    name: "Flipkart Minutes"
+    alias: FKM
+    pdp_table: flipkart_minutes_crawl_pdp
+  - pf_id: 38
+    name: "Supertails"
+    alias: SPT
+    pdp_table: supertails_crawl_pdp
+  - pf_id: 53
+    name: "Amazon Now"
+    alias: ANW
+    pdp_table: amazon_now_crawl_pdp
