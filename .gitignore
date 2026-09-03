@@ -4,6 +4,9 @@
 # Data exports (potentially large/sensitive)
 data/
 
+# Reference spreadsheets (not committed)
+platform_nestle.xlsx
+
 # Logs
 logs/
 
